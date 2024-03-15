@@ -1,17 +1,22 @@
+import { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import UpdateTask from './UpdateTask';
 
 
 const TaskList=()=>{
+    const [modalShow, setModalShow] = useState(false);
 
     const handleUpdate=()=>{
         console.log("Task updated");
+        setModalShow(true);
     };
 
     const handleDelete=()=>{
         console.log("Task Deleted");
     };
     return(
+        <>
         <Table striped bordered hover>
       <thead>
         <tr className='text-center'>
@@ -38,6 +43,12 @@ const TaskList=()=>{
        
       </tbody>
     </Table>
+
+<UpdateTask
+show={modalShow}
+onHide={() => setModalShow(false)}
+/>
+</>
     );
 };
 export default TaskList;
