@@ -13,13 +13,11 @@ const TaskList = () => {
   const { taskList } = useSelector((state) => state.tasks);
 
   const handleUpdate = (task) => {
-    // console.log("Task updated");
     setModalShow(true);
     dispatch(setSelectedTask(task));
   };
 
   const handleDelete = (task) => {
-    // console.log("Task Deleted");
     dispatch(removeTaskFromList(task));
   };
 

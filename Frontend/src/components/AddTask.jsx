@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
-import { addTaskToList } from "../slices/taskSlice";
+import { addTaskToList, addTaskToTheServer } from "../slices/taskSlice";
 
 const AddTask = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,8 @@ const AddTask = () => {
 
   const handleClick = (e) => {
     e.preventDefault();
-    dispatch(addTaskToList({ title, description }));
+    // dispatch(addTaskToList({ title, description }));
+    dispatch(addTaskToTheServer({title,description}));
     setTitle("");
     setDescription("");
   };
