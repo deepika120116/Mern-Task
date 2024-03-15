@@ -1,14 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import {useDispatch,useSelector } from "react-redux";
+import { updateTaskInTheList } from "../slices/taskSlice";
 const UpdateTask = (props) => {
+
+  const {selectedTask}=useSelector(state=>state.tasks);
+  const dispatch=useDispatch();
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [id,setId]=useState(0);
+
+  useEffect(()=>{
+    if(Object.keys(selectedTask).length){
+      setId(selectedTask.id);
+      setTitle(selectedTask.title);
+      setDescription(selectedTask.description);
+    }
+  },[selectedTask]);
 
   const updateTask = () => {
-    console.log("Task modal screen");
+    // console.log("Task modal screen");
     props.onHide();
+    dispatch(updateTaskInTheList({id,title,description}));
   };
   return (
     <Modal
