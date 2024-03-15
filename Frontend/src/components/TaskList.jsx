@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {  useSelector,useDispatch } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import UpdateTask from "./UpdateTask";
-import {removeTaskFromList, setSelectedTask} from '../slices/taskSlice';
+import {getTaskFromTheServer, removeTaskFromList, setSelectedTask} from '../slices/taskSlice';
 
 
 const TaskList = () => {
@@ -22,6 +22,10 @@ const TaskList = () => {
     // console.log("Task Deleted");
     dispatch(removeTaskFromList(task));
   };
+
+  useEffect(()=>{
+    dispatch(getTaskFromTheServer());
+  },[dispatch]);
   return (
     <>
       <Table striped bordered hover>
