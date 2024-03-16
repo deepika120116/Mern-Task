@@ -3,7 +3,7 @@ import { Container } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useDispatch } from "react-redux";
-import { addTaskToList, addTaskToTheServer } from "../slices/taskSlice";
+import { addTaskToTheServer } from "../slices/taskSlice";
 
 const AddTask = () => {
   const dispatch = useDispatch();

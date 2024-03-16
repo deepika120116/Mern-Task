@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import {useDispatch,useSelector } from "react-redux";
-import { updateTaskInTheList } from "../slices/taskSlice";
+import { updateTaskInTheServer } from "../slices/taskSlice";
 const UpdateTask = (props) => {
 
   const {selectedTask}=useSelector(state=>state.tasks);
@@ -24,7 +24,8 @@ const UpdateTask = (props) => {
   const updateTask = () => {
     // console.log("Task modal screen");
     props.onHide();
-    dispatch(updateTaskInTheList({id,title,description}));
+    // dispatch(updateTaskInTheList({id,title,description}));
+    dispatch(updateTaskInTheServer({id,title,description}));
   };
   return (
     <Modal

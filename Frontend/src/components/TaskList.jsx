@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import {  useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import UpdateTask from "./UpdateTask";
-import {getTaskFromTheServer, removeTaskFromList, setSelectedTask} from '../slices/taskSlice';
-
+import {
+  deleteTaskInTheServer,
+  getTaskFromTheServer,
+  removeTaskFromList,
+  setSelectedTask,
+} from "../slices/taskSlice";
 
 const TaskList = () => {
-
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
   const [modalShow, setModalShow] = useState(false);
   const { taskList } = useSelector((state) => state.tasks);
 
@@ -18,12 +21,16 @@ const TaskList = () => {
   };
 
   const handleDelete = (task) => {
-    dispatch(removeTaskFromList(task));
+    dispatch(deleteTaskInTheServer(task))
+      .unwrap()
+      .then(() => {
+        dispatch(removeTaskFromList(task))
+      });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getTaskFromTheServer());
-  },[dispatch]);
+  }, [dispatch]);
   return (
     <>
       <Table striped bordered hover>
@@ -40,18 +47,21 @@ const TaskList = () => {
             taskList.map((task, index) => {
               return (
                 <tr className="text-center" key={task.id}>
-                  <td>{index+1}</td>
+                  <td>{index + 1}</td>
                   <td>{task.title}</td>
                   <td>{task.description}</td>
                   <td>
                     <Button
                       variant="primary"
                       className="mx-3"
-                      onClick={()=>handleUpdate(task)}
+                      onClick={() => handleUpdate(task)}
                     >
                       <i className="bi bi-pencil"></i>
                     </Button>
-                    <Button variant="primary" onClick={()=>handleDelete(task)}>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleDelete(task)}
+                    >
                       <i className="bi bi-x-octagon"></i>
                     </Button>
                   </td>
