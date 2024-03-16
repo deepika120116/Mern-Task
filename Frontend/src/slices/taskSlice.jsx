@@ -1,6 +1,6 @@
 import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
 
-const url="http://localhost:8000/tasks";
+const url="http://localhost:4000/api/tasks";
 
 //GET Async operation
 export const getTaskFromTheServer=createAsyncThunk(
@@ -46,7 +46,7 @@ export const updateTaskInTheServer = createAsyncThunk(
     };
 
     try {
-      const response = await fetch(`${url}/${task.id}`, options);
+      const response = await fetch(url+'/'+task.id, options);
   
 
       if (response.ok) {
